@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker ps:*)",
+      "Bash(docker:*)",
+      "Bash(psql:*)",
+      "Bash(brew services:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma generate:*)",
+      "Bash(npx prisma migrate deploy:*)",
+      "Bash(npx prisma migrate:*)",
+      "Bash(npm run prisma:seed:*)",
+      "Bash(pkill:*)",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "Bash(chmod:*)",
+      "Bash(pgrep:*)",
+      "Bash(npm run lint:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(ls:*)",
+      "Bash(pg_isready:*)",
+      "Bash(npx prisma db seed:*)",
+      "Bash(npm run start:dev:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)"
+    ]
+  }
+}
