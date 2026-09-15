@@ -47,6 +47,9 @@ COPY --from=builder /app/prisma ./prisma
 # Copy built application
 COPY --from=builder --chown=nestjs:nodejs /app/dist ./dist
 
+# Create writable uploads directory
+RUN mkdir -p /app/uploads && chown -R nestjs:nodejs /app/uploads
+
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=4000
