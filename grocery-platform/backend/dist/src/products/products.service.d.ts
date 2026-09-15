@@ -16,17 +16,20 @@ export declare class ProductsService {
             images: {
                 id: string;
                 sortOrder: number;
-                isPrimary: boolean;
-                productId: string;
                 url: string;
+                isPrimary: boolean;
                 altText: string | null;
+                productId: string;
             }[];
             _count: {
                 reviews: number;
             };
         } & {
             id: string;
-            categoryId: string;
+            isActive: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            deletedAt: Date | null;
             name: string;
             slug: string;
             description: string | null;
@@ -39,10 +42,7 @@ export declare class ProductsService {
             stockQuantity: number;
             minStockThreshold: number;
             isFeatured: boolean;
-            isActive: boolean;
-            createdAt: Date;
-            updatedAt: Date;
-            deletedAt: Date | null;
+            categoryId: string;
         })[];
         meta: {
             page: number;
@@ -53,26 +53,6 @@ export declare class ProductsService {
     }>;
     findBySlug(slugOrId: string): Promise<{
         averageRating: number;
-        category: {
-            id: string;
-            name: string;
-            slug: string;
-            description: string | null;
-            isActive: boolean;
-            createdAt: Date;
-            updatedAt: Date;
-            parentId: string | null;
-            imageUrl: string | null;
-            sortOrder: number;
-        };
-        images: {
-            id: string;
-            sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
-            url: string;
-            altText: string | null;
-        }[];
         reviews: ({
             user: {
                 firstName: string;
@@ -83,59 +63,41 @@ export declare class ProductsService {
             id: string;
             createdAt: Date;
             updatedAt: Date;
+            userId: string;
             productId: string;
             isPublished: boolean;
-            userId: string;
             rating: number;
             title: string | null;
             comment: string | null;
         })[];
-        _count: {
-            reviews: number;
-        };
-        id: string;
-        categoryId: string;
-        name: string;
-        slug: string;
-        description: string | null;
-        sku: string;
-        barcode: string | null;
-        price: Prisma.Decimal;
-        discountPrice: Prisma.Decimal | null;
-        unit: import(".prisma/client").$Enums.ProductUnit;
-        unitStep: Prisma.Decimal;
-        stockQuantity: number;
-        minStockThreshold: number;
-        isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
-    }>;
-    findById(id: string): Promise<{
         category: {
             id: string;
-            name: string;
-            slug: string;
-            description: string | null;
             isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
-            parentId: string | null;
+            name: string;
+            slug: string;
+            description: string | null;
             imageUrl: string | null;
             sortOrder: number;
+            parentId: string | null;
         };
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
-    } & {
+        _count: {
+            reviews: number;
+        };
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -148,10 +110,48 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
+        categoryId: string;
+    }>;
+    findById(id: string): Promise<{
+        category: {
+            id: string;
+            isActive: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            slug: string;
+            description: string | null;
+            imageUrl: string | null;
+            sortOrder: number;
+            parentId: string | null;
+        };
+        images: {
+            id: string;
+            sortOrder: number;
+            url: string;
+            isPrimary: boolean;
+            altText: string | null;
+            productId: string;
+        }[];
+    } & {
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         deletedAt: Date | null;
+        name: string;
+        slug: string;
+        description: string | null;
+        sku: string;
+        barcode: string | null;
+        price: Prisma.Decimal;
+        discountPrice: Prisma.Decimal | null;
+        unit: import(".prisma/client").$Enums.ProductUnit;
+        unitStep: Prisma.Decimal;
+        stockQuantity: number;
+        minStockThreshold: number;
+        isFeatured: boolean;
+        categoryId: string;
     }>;
     findFeatured(limit?: number): Promise<({
         category: {
@@ -162,14 +162,17 @@ export declare class ProductsService {
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
     } & {
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -182,10 +185,7 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        categoryId: string;
     })[]>;
     findPopular(limit?: number): Promise<({
         category: {
@@ -196,14 +196,17 @@ export declare class ProductsService {
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
     } & {
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -216,10 +219,7 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        categoryId: string;
     })[]>;
     findRecommended(limit?: number): Promise<({
         category: {
@@ -230,14 +230,17 @@ export declare class ProductsService {
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
     } & {
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -250,23 +253,20 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        categoryId: string;
     })[]>;
     search(query: string, limit?: number): Promise<{
         id: string;
         name: string;
         slug: string;
-        price: Prisma.Decimal;
-        discountPrice: Prisma.Decimal | null;
-        unit: import(".prisma/client").$Enums.ProductUnit;
-        stockQuantity: number;
         category: {
             name: string;
             slug: string;
         };
+        price: Prisma.Decimal;
+        discountPrice: Prisma.Decimal | null;
+        unit: import(".prisma/client").$Enums.ProductUnit;
+        stockQuantity: number;
         images: {
             url: string;
         }[];
@@ -274,27 +274,30 @@ export declare class ProductsService {
     create(dto: CreateProductDto, adminUserId?: string): Promise<{
         category: {
             id: string;
-            name: string;
-            slug: string;
-            description: string | null;
             isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
-            parentId: string | null;
+            name: string;
+            slug: string;
+            description: string | null;
             imageUrl: string | null;
             sortOrder: number;
+            parentId: string | null;
         };
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
     } & {
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -307,35 +310,35 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        categoryId: string;
     }>;
     update(id: string, dto: UpdateProductDto, adminUserId?: string): Promise<{
         category: {
             id: string;
-            name: string;
-            slug: string;
-            description: string | null;
             isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
-            parentId: string | null;
+            name: string;
+            slug: string;
+            description: string | null;
             imageUrl: string | null;
             sortOrder: number;
+            parentId: string | null;
         };
         images: {
             id: string;
             sortOrder: number;
-            isPrimary: boolean;
-            productId: string;
             url: string;
+            isPrimary: boolean;
             altText: string | null;
+            productId: string;
         }[];
     } & {
         id: string;
-        categoryId: string;
+        isActive: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
         name: string;
         slug: string;
         description: string | null;
@@ -348,10 +351,7 @@ export declare class ProductsService {
         stockQuantity: number;
         minStockThreshold: number;
         isFeatured: boolean;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        categoryId: string;
     }>;
     delete(id: string): Promise<{
         message: string;
