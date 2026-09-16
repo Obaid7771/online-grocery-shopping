@@ -37,7 +37,7 @@ RUN addgroup --system --gid 1001 nodejs && \
 
 # Copy package files and install production dependencies only
 COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
+RUN npm ci --include=dev && npm cache clean --force
 
 # Copy Prisma client and schema
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
