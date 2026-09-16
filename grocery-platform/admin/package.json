@@ -24,6 +24,8 @@
     "postcss": "^8.4.40",
     "recharts": "^2.12.7",
     "@tanstack/react-table": "^8.19.3",
+    "prisma": "^6.4.1",
+    "ts-node": "^10.9.2",
     "react-hook-form": "^7.52.2",
     "@hookform/resolvers": "^3.9.0",
     "zod": "^3.23.8",
