@@ -142,62 +142,73 @@ async function main() {
     }
   }
 
-  // 6. Seed Grocery Categories
-  console.log('🥦 Seeding Categories...');
-  const produceCat = await prisma.category.create({
-    data: {
-      name: 'Fresh Produce',
-      slug: 'fresh-produce',
-      description: 'Farm-fresh organic fruits, vegetables, and leafy greens.',
-      imageUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80',
-      sortOrder: 1,
-      isActive: true,
-    },
-  });
+ // 6. Seed Grocery Categories
+console.log('🥦 Seeding Categories...');
 
-  const dairyCat = await prisma.category.create({
-    data: {
-      name: 'Dairy & Eggs',
-      slug: 'dairy-and-eggs',
-      description: 'Organic milk, artisan cheeses, yogurts, and free-range eggs.',
-      imageUrl: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=600&q=80',
-      sortOrder: 2,
-      isActive: true,
-    },
-  });
+const produceCat = await prisma.category.upsert({
+  where: { slug: 'fresh-produce' },
+  update: {},
+  create: {
+    name: 'Fresh Produce',
+    slug: 'fresh-produce',
+    description: 'Farm-fresh organic fruits, vegetables, and leafy greens.',
+    imageUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80',
+    sortOrder: 1,
+    isActive: true,
+  },
+});
 
-  const bakeryCat = await prisma.category.create({
-    data: {
-      name: 'Bakery & Bread',
-      slug: 'bakery-and-bread',
-      description: 'Artisan sourdough, fresh bagels, baguettes, and morning pastries.',
-      imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
-      sortOrder: 3,
-      isActive: true,
-    },
-  });
+const dairyCat = await prisma.category.upsert({
+  where: { slug: 'dairy-and-eggs' },
+  update: {},
+  create: {
+    name: 'Dairy & Eggs',
+    slug: 'dairy-and-eggs',
+    description: 'Organic milk, artisan cheeses, yogurts, and free-range eggs.',
+    imageUrl: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=600&q=80',
+    sortOrder: 2,
+    isActive: true,
+  },
+});
 
-  const meatCat = await prisma.category.create({
-    data: {
-      name: 'Meat & Seafood',
-      slug: 'meat-and-seafood',
-      description: 'Grass-fed beef, organic poultry, wild-caught salmon and shrimp.',
-      imageUrl: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80',
-      sortOrder: 4,
-      isActive: true,
-    },
-  });
+const bakeryCat = await prisma.category.upsert({
+  where: { slug: 'bakery-and-bread' },
+  update: {},
+  create: {
+    name: 'Bakery & Bread',
+    slug: 'bakery-and-bread',
+    description: 'Artisan sourdough, fresh bagels, baguettes, and morning pastries.',
+    imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+    sortOrder: 3,
+    isActive: true,
+  },
+});
 
-  const beverageCat = await prisma.category.create({
-    data: {
-      name: 'Beverages',
-      slug: 'beverages',
-      description: 'Cold-pressed juices, sparkling waters, specialty coffees, and teas.',
-      imageUrl: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80',
-      sortOrder: 5,
-      isActive: true,
-    },
-  });
+const meatCat = await prisma.category.upsert({
+  where: { slug: 'meat-and-seafood' },
+  update: {},
+  create: {
+    name: 'Meat & Seafood',
+    slug: 'meat-and-seafood',
+    description: 'Grass-fed beef, organic poultry, wild-caught salmon and shrimp.',
+    imageUrl: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80',
+    sortOrder: 4,
+    isActive: true,
+  },
+});
+
+const beverageCat = await prisma.category.upsert({
+  where: { slug: 'beverages' },
+  update: {},
+  create: {
+    name: 'Beverages',
+    slug: 'beverages',
+    description: 'Cold-pressed juices, sparkling waters, specialty coffees, and teas.',
+    imageUrl: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=600&q=80',
+    sortOrder: 5,
+    isActive: true,
+  },
+});
 
   // 7. Seed Sample Products
   console.log('🍎 Seeding Products with Prices & Stock...');
